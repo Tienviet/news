@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\User;
+use App\Services\UserService;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
@@ -11,16 +11,16 @@ use Illuminate\Support\Facades\Log;
 
 class UserAPIController extends Controller
 {
-    protected $users;
+    protected $userService;
 
-    public function __construct(User $user)
+    public function __construct(UserService $userService)
     {
-        $this->users = $user;
+        $this->userService = $userService;
     }
 
     public function index()
     {
-        $data = $this->users->all();
+        $data = $this->userService->getUser();
         return $data;
     }
 
@@ -36,7 +36,7 @@ class UserAPIController extends Controller
             ]);
 
             $roles = $request->role;
-//            dd($roles);
+
             foreach ($roles as $roleItem) {
                 DB::table('role_user')->insert([
                     'user_id' => $data->id,

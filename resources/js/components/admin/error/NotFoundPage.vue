@@ -1,7 +1,6 @@
 <template>
-    <div class="container-scroller">
         <div class="container-fluid page-body-wrapper full-page-wrapper auth-page">
-            <div class="content-wrapper d-flex align-items-center text-center error-page bg-primary">
+            <div class="row content-wrapper d-flex align-items-center text-center error-page bg-primary">
                 <div class="row flex-grow">
                     <div class="col-lg-7 mx-auto text-white">
                         <div class="row align-items-center d-flex flex-row">
@@ -29,7 +28,6 @@
             <!-- content-wrapper ends -->
         </div>
         <!-- page-body-wrapper ends -->
-    </div>
 </template>
 
 <script>

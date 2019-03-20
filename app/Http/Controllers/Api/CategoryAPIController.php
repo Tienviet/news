@@ -3,16 +3,17 @@
 namespace App\Http\Controllers\Api;
 
 use App\Category;
+use App\Services\CategoryService;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class CategoryAPIController extends Controller
 {
-    protected $category;
+    protected $categoryService;
 
-    public function __construct(Category $category)
+    public function __construct(CategoryService $categoryService)
     {
-        $this->category = $category;
+        $this->categoryService = $categoryService;
     }
 
     /**
@@ -22,7 +23,7 @@ class CategoryAPIController extends Controller
      */
     public function index()
     {
-        $data = $this->category->all();
+        $data = $this->categoryService->getCate();
         return $data;
     }
 

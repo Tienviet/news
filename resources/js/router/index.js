@@ -39,6 +39,7 @@ const router = new VueRouter({
                     name: 'Category',
                     component: Category
                 },
+
                 {
                     path: 'list-user',
                     name: 'UserTableComponent',

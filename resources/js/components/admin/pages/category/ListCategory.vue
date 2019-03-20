@@ -5,10 +5,8 @@
         <div class="col-lg-12 grid-margin stretch-card">
           <div class="card">
             <div class="card-body">
-              <h4 class="card-title">Manager User</h4>
-              <router-link to="/create-user">
-                <button class="btn btn-success btn-sm"><i class="mdi mdi-plus"></i> Create</button>
-              </router-link>
+              <h4 class="card-title">Manager category</h4>
+                <button class="btn btn-success btn-sm" @click="create()"><i class="mdi mdi-plus"></i> Create</button>
               <div class="table-responsive">
                 <table class="table a">
                   <thead>
@@ -26,7 +24,7 @@
                       <button type="button" class="btn btn-dark btn-sm">
                         <i class="mdi mdi-cloud-download"></i>Edit
                       </button>
-                      <button @click="deleteUser()" type="button" class="btn btn-danger btn-sm">
+                      <button @click="deleteCate()" type="button" class="btn btn-danger btn-sm">
                         <i class="fa fa-trash-o"></i>Delete
                       </button>
                     </td>
@@ -39,14 +37,20 @@
         </div>
       </div>
     </div>
+    <modal-create></modal-create>
+    <v-dialog/>
   </div>
 </template>
 
 <script>
     import {HTTP} from "@/BaseRequest";
+    import ModalCreate from "../modals/ModalCreate"
 
     export default {
         name: "ListCategory",
+        components: {
+            ModalCreate
+        },
 
         data() {
             return {
@@ -62,7 +66,24 @@
                 HTTP.get('api/category').then(respone => {
                     this.items = respone.data;
                 })
+            },
+
+            create(){
+              this.$modal.show('modal-create')
+            },
+
+            deleteCate(){
+                this.$modal.show('dialog',{
+                    title: 'Delete category',
+                    text: 'Are you delete category ?',
+                    buttons: [
+                        {
+                            title: 'Delete',
+                        }
+                    ]
+                })
             }
+
         }
     }
 </script>
