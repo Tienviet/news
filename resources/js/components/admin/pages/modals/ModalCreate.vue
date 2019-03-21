@@ -16,8 +16,8 @@
           <span class="text-danger">{{ errors.first('name')}}</span>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-success mr-2" @click="createCate()">Add</button>
-          <button class="btn btn-light">Cancel</button>
+          <button type="button" class="btn btn-success mr-2" @click="submit()">Add</button>
+          <button type="reset" class="btn btn-light">Cancel</button>
         </div>
       </form>
     </div>
@@ -31,17 +31,27 @@
         name: "ModalCreate",
         data() {
             return {
-                category: {
-                    name: []
-                }
+                category: {}
             }
+        },
+        created() {
+
         },
 
         methods: {
+            submit() {
+                this.$validator.validateAll();
+                this.createCate();
+            },
+
             createCate() {
                 this.$validator.validateAll();
-                HTTP.post('api/category',this.category.name).then(respone => {
-                    this.show.message('success')
+                HTTP.post('api/category', this.category).then(() => {
+                    this.$modal.hide('modal-create');
+                    this.$emit('success');
+                    this.$toast.success('Add category success !', {
+                        duration: 5000,
+                    })
                 })
 
             }

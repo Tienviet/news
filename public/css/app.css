@@ -9122,6 +9122,6 @@ a.text-dark:focus {
 }
 
 .err {
-  border: 1px solid #e3342f;
+  border: 1px solid #e3342f !important;
 }
 

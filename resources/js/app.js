@@ -29,10 +29,13 @@ Vue.component('base-component', require('./components/admin/BaseComponent.vue').
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 import VeeValidate from 'vee-validate';
-import VModal from 'vue-js-modal'
+import VModal from 'vue-js-modal';
+import VueToast from 'vue-toast-notification';
+import 'vue-toast-notification/dist/index.css';
 
 Vue.use(VeeValidate);
-Vue.use(VModal)
+Vue.use(VueToast);
+Vue.use(VModal, { dialog: true})
 
 const app = new Vue({
     el: '#app',

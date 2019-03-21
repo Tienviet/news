@@ -22,12 +22,14 @@ class CategoryService
         $this->category = $category;
     }
 
-    public function getCate(){
+    public function getCate()
+    {
         return $this->category->all();
     }
 
-    public function addCate($name){
-        $data = $this->category->create($name);
+    public function addCate($name)
+    {
+        $data = $this->category->create(['name' => $name]);
         return $data;
     }
 

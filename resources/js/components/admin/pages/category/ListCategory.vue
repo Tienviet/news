@@ -6,7 +6,7 @@
           <div class="card">
             <div class="card-body">
               <h4 class="card-title">Manager category</h4>
-                <button class="btn btn-success btn-sm" @click="create()"><i class="mdi mdi-plus"></i> Create</button>
+              <button class="btn btn-success btn-sm" @click="create()"><i class="mdi mdi-plus"></i> Create</button>
               <div class="table-responsive">
                 <table class="table a">
                   <thead>
@@ -37,8 +37,8 @@
         </div>
       </div>
     </div>
-    <modal-create></modal-create>
-    <!--<v-dialog/>-->
+    <modal-create @success="success"></modal-create>
+    <v-dialog/>
   </div>
 </template>
 
@@ -60,37 +60,41 @@
                 }
             }
         },
+
         created() {
             this.getCategory();
-
         },
+
         methods: {
+
             getCategory() {
                 HTTP.get('api/category').then(respone => {
                     this.items = respone.data;
                 })
             },
 
-            create(){
-              this.$modal.show('modal-create')
+            create() {
+                this.$modal.show('modal-create')
             },
 
-            deleteCate(){
-                this.$modal.show('dialog',{
+            success() {
+                this.getCategory();
+            },
+
+            deleteCate() {
+                this.$modal.show('dialog', {
                     title: 'Delete category',
                     text: 'Are you delete category ?',
                     buttons: [
                         {
                             title: 'Delete',
+                        },
+                        {
+                            title: 'close'
                         }
                     ]
                 })
             },
-
-            createCate(){
-              console.log('dhdhdfdfjkd')
-            }
-
         }
     }
 </script>
