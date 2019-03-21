@@ -38,7 +38,7 @@
       </div>
     </div>
     <modal-create></modal-create>
-    <v-dialog/>
+    <!--<v-dialog/>-->
   </div>
 </template>
 
@@ -54,7 +54,10 @@
 
         data() {
             return {
-                items: []
+                items: [],
+                category: {
+                    name: []
+                }
             }
         },
         created() {
@@ -82,6 +85,10 @@
                         }
                     ]
                 })
+            },
+
+            createCate(){
+              console.log('dhdhdfdfjkd')
             }
 
         }

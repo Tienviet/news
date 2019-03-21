@@ -15,6 +15,7 @@
     <!-- plugin css for this page -->
     <!-- End plugin css for this page -->
     <!-- inject:css -->
+    <link rel="stylesheet" href="{{ asset('/css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('/admin/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('/admin/vendors/iconfonts/font-awesome/css/font-awesome.css') }}">
     <!-- endinject -->

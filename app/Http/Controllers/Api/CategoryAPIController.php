@@ -35,7 +35,7 @@ class CategoryAPIController extends Controller
 
     public function store(Request $request)
     {
-        //
+       return $this->categoryService->addCate($request->all());
     }
 
 

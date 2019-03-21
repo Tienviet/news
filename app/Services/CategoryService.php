@@ -10,6 +10,8 @@ namespace App\Services;
 
 
 use App\Category;
+use http\Message;
+use Illuminate\Http\Request;
 
 class CategoryService
 {
@@ -22,6 +24,11 @@ class CategoryService
 
     public function getCate(){
         return $this->category->all();
+    }
+
+    public function addCate($name){
+        $data = $this->category->create($name);
+        return $data;
     }
 
 }

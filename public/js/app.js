@@ -2619,7 +2619,10 @@ __webpack_require__.r(__webpack_exports__);
 
   data() {
     return {
-      items: []
+      items: [],
+      category: {
+        name: []
+      }
     };
   },
 
@@ -2646,6 +2649,10 @@ __webpack_require__.r(__webpack_exports__);
           title: 'Delete'
         }]
       });
+    },
+
+    createCate() {
+      console.log('dhdhdfdfjkd');
     }
 
   }
@@ -2662,6 +2669,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _BaseRequest__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @/BaseRequest */ "./resources/js/BaseRequest.js");
 //
 //
 //
@@ -2686,8 +2694,29 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: "ModalCreate"
+  name: "ModalCreate",
+
+  data() {
+    return {
+      category: {
+        name: []
+      }
+    };
+  },
+
+  methods: {
+    createCate() {
+      this.$validator.validateAll();
+      _BaseRequest__WEBPACK_IMPORTED_MODULE_0__["HTTP"].post('api/category', this.category.name).then(respone => {
+        this.show.message('success');
+      });
+    }
+
+  }
 });
 
 /***/ }),
@@ -7996,7 +8025,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -8053,7 +8082,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -51055,33 +51084,39 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     staticClass: "forms-sample"
   }, [_c('div', {
     staticClass: "form-group"
-  }, [_c('label', {
-    attrs: {
-      "for": "exampleInputName1"
-    }
-  }, [_vm._v("Name")]), _vm._v(" "), _c('input', {
+  }, [_c('label', [_vm._v("Name")]), _vm._v(" "), _c('input', {
     directives: [{
+      name: "validate",
+      rawName: "v-validate",
+      value: ('required'),
+      expression: "'required'"
+    }, {
       name: "model",
       rawName: "v-model",
-      value: (_vm.name),
-      expression: "name"
+      value: (_vm.category.name),
+      expression: "category.name"
     }],
     staticClass: "form-control",
+    class: {
+      err: _vm.errors.has('name')
+    },
     attrs: {
       "type": "text",
-      "id": "exampleInputName1",
-      "placeholder": "Name"
+      "placeholder": "Name",
+      "name": "name"
     },
     domProps: {
-      "value": (_vm.name)
+      "value": (_vm.category.name)
     },
     on: {
       "input": function($event) {
         if ($event.target.composing) { return; }
-        _vm.name = $event.target.value
+        _vm.$set(_vm.category, "name", $event.target.value)
       }
     }
-  })]), _vm._v(" "), _c('div', {
+  }), _vm._v(" "), _c('span', {
+    staticClass: "text-danger"
+  }, [_vm._v(_vm._s(_vm.errors.first('name')))])]), _vm._v(" "), _c('div', {
     staticClass: "modal-footer"
   }, [_c('button', {
     staticClass: "btn btn-success mr-2",
@@ -51090,10 +51125,10 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     },
     on: {
       "click": function($event) {
-        return _vm.createUser()
+        return _vm.createCate()
       }
     }
-  }, [_vm._v("Submit")]), _vm._v(" "), _c('button', {
+  }, [_vm._v("Add")]), _vm._v(" "), _c('button', {
     staticClass: "btn btn-light"
   }, [_vm._v("Cancel")])])])])])
 },staticRenderFns: []}
@@ -51435,7 +51470,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
     }, [_c('i', {
       staticClass: "fa fa-trash-o"
     }), _vm._v("Delete\n                    ")])])])
-  }), 0)])])])])])])]), _vm._v(" "), _c('modal-create'), _vm._v(" "), _c('v-dialog')], 1)
+  }), 0)])])])])])])]), _vm._v(" "), _c('modal-create')], 1)
 },staticRenderFns: [function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('thead', [_c('tr', [_c('th', [_vm._v("No")]), _vm._v(" "), _c('th', [_vm._v("Name")]), _vm._v(" "), _c('th', {
     staticClass: "text-center",
@@ -68237,7 +68272,7 @@ var Component = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/
   /* cssModules */
   null
 )
-Component.options.__file = "/home/tienviet/project/news/resources/js/components/admin/BaseComponent.vue"
+Component.options.__file = "/home/vietnt/news/resources/js/components/admin/BaseComponent.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] BaseComponent.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -68270,7 +68305,7 @@ var Component = __webpack_require__(/*! ../../../../../node_modules/vue-loader/l
   /* cssModules */
   null
 )
-Component.options.__file = "/home/tienviet/project/news/resources/js/components/admin/auth/LoginPage.vue"
+Component.options.__file = "/home/vietnt/news/resources/js/components/admin/auth/LoginPage.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] LoginPage.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -68303,7 +68338,7 @@ var Component = __webpack_require__(/*! ../../../../../node_modules/vue-loader/l
   /* cssModules */
   null
 )
-Component.options.__file = "/home/tienviet/project/news/resources/js/components/admin/auth/RegisterPage.vue"
+Component.options.__file = "/home/vietnt/news/resources/js/components/admin/auth/RegisterPage.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] RegisterPage.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -68336,7 +68371,7 @@ var Component = __webpack_require__(/*! ../../../../../node_modules/vue-loader/l
   /* cssModules */
   null
 )
-Component.options.__file = "/home/tienviet/project/news/resources/js/components/admin/error/NotFoundPage.vue"
+Component.options.__file = "/home/vietnt/news/resources/js/components/admin/error/NotFoundPage.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] NotFoundPage.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -68369,7 +68404,7 @@ var Component = __webpack_require__(/*! ../../../../../node_modules/vue-loader/l
   /* cssModules */
   null
 )
-Component.options.__file = "/home/tienviet/project/news/resources/js/components/admin/pages/CreateRole.vue"
+Component.options.__file = "/home/vietnt/news/resources/js/components/admin/pages/CreateRole.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] CreateRole.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -68402,7 +68437,7 @@ var Component = __webpack_require__(/*! ../../../../../node_modules/vue-loader/l
   /* cssModules */
   null
 )
-Component.options.__file = "/home/tienviet/project/news/resources/js/components/admin/pages/CreateUser.vue"
+Component.options.__file = "/home/vietnt/news/resources/js/components/admin/pages/CreateUser.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] CreateUser.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -68435,7 +68470,7 @@ var Component = __webpack_require__(/*! ../../../../../node_modules/vue-loader/l
   /* cssModules */
   null
 )
-Component.options.__file = "/home/tienviet/project/news/resources/js/components/admin/pages/EditUser.vue"
+Component.options.__file = "/home/vietnt/news/resources/js/components/admin/pages/EditUser.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] EditUser.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -68468,7 +68503,7 @@ var Component = __webpack_require__(/*! ../../../../../node_modules/vue-loader/l
   /* cssModules */
   null
 )
-Component.options.__file = "/home/tienviet/project/news/resources/js/components/admin/pages/ListPage.vue"
+Component.options.__file = "/home/vietnt/news/resources/js/components/admin/pages/ListPage.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] ListPage.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -68501,7 +68536,7 @@ var Component = __webpack_require__(/*! ../../../../../node_modules/vue-loader/l
   /* cssModules */
   null
 )
-Component.options.__file = "/home/tienviet/project/news/resources/js/components/admin/pages/ListRole.vue"
+Component.options.__file = "/home/vietnt/news/resources/js/components/admin/pages/ListRole.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] ListRole.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -68534,7 +68569,7 @@ var Component = __webpack_require__(/*! ../../../../../node_modules/vue-loader/l
   /* cssModules */
   null
 )
-Component.options.__file = "/home/tienviet/project/news/resources/js/components/admin/pages/UserTableComponent.vue"
+Component.options.__file = "/home/vietnt/news/resources/js/components/admin/pages/UserTableComponent.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] UserTableComponent.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -68567,7 +68602,7 @@ var Component = __webpack_require__(/*! ../../../../../../node_modules/vue-loade
   /* cssModules */
   null
 )
-Component.options.__file = "/home/tienviet/project/news/resources/js/components/admin/pages/category/ListCategory.vue"
+Component.options.__file = "/home/vietnt/news/resources/js/components/admin/pages/category/ListCategory.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] ListCategory.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -68600,7 +68635,7 @@ var Component = __webpack_require__(/*! ../../../../../../node_modules/vue-loade
   /* cssModules */
   null
 )
-Component.options.__file = "/home/tienviet/project/news/resources/js/components/admin/pages/modals/ModalCreate.vue"
+Component.options.__file = "/home/vietnt/news/resources/js/components/admin/pages/modals/ModalCreate.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] ModalCreate.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -68633,7 +68668,7 @@ var Component = __webpack_require__(/*! ../../../../../node_modules/vue-loader/l
   /* cssModules */
   null
 )
-Component.options.__file = "/home/tienviet/project/news/resources/js/components/admin/pages/widget.vue"
+Component.options.__file = "/home/vietnt/news/resources/js/components/admin/pages/widget.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] widget.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -68666,7 +68701,7 @@ var Component = __webpack_require__(/*! ../../../../../node_modules/vue-loader/l
   /* cssModules */
   null
 )
-Component.options.__file = "/home/tienviet/project/news/resources/js/components/admin/partials/FooterComponent.vue"
+Component.options.__file = "/home/vietnt/news/resources/js/components/admin/partials/FooterComponent.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] FooterComponent.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -68699,7 +68734,7 @@ var Component = __webpack_require__(/*! ../../../../../node_modules/vue-loader/l
   /* cssModules */
   null
 )
-Component.options.__file = "/home/tienviet/project/news/resources/js/components/admin/partials/NavbarComponent.vue"
+Component.options.__file = "/home/vietnt/news/resources/js/components/admin/partials/NavbarComponent.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] NavbarComponent.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -68732,7 +68767,7 @@ var Component = __webpack_require__(/*! ../../../../../node_modules/vue-loader/l
   /* cssModules */
   null
 )
-Component.options.__file = "/home/tienviet/project/news/resources/js/components/admin/partials/SiderBarComponent.vue"
+Component.options.__file = "/home/vietnt/news/resources/js/components/admin/partials/SiderBarComponent.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] SiderBarComponent.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -68765,7 +68800,7 @@ var Component = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/
   /* cssModules */
   null
 )
-Component.options.__file = "/home/tienviet/project/news/resources/js/components/user/Main.vue"
+Component.options.__file = "/home/vietnt/news/resources/js/components/user/Main.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] Main.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -68798,7 +68833,7 @@ var Component = __webpack_require__(/*! ../../../../../node_modules/vue-loader/l
   /* cssModules */
   null
 )
-Component.options.__file = "/home/tienviet/project/news/resources/js/components/user/partials/Footer.vue"
+Component.options.__file = "/home/vietnt/news/resources/js/components/user/partials/Footer.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] Footer.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -68831,7 +68866,7 @@ var Component = __webpack_require__(/*! ../../../../../node_modules/vue-loader/l
   /* cssModules */
   null
 )
-Component.options.__file = "/home/tienviet/project/news/resources/js/components/user/partials/Header.vue"
+Component.options.__file = "/home/vietnt/news/resources/js/components/user/partials/Header.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] Header.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -68970,8 +69005,8 @@ console.log(router);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /home/tienviet/project/news/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /home/tienviet/project/news/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /home/vietnt/news/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /home/vietnt/news/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
